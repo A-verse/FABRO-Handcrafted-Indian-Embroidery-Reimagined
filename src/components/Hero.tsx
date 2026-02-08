@@ -13,27 +13,27 @@ export default function Hero() {
           {/* LEFT COLUMN: TEXT CONTENT */}
           <div className="animate-slide-up">
             {/* Label with micro-copy */}
-            <p className="label-text text-charcoal/60 mb-6 tracking-widest">HANDCRAFTED FOR YOU</p>
+            <p className="label-text text-charcoal/55 mb-6 tracking-widest">HANDCRAFTED FOR YOU</p>
 
             {/* Large, Editorial-Style Headline */}
-            <h1 className="heading-display-lg text-charcoal mb-6">
+            <h1 className="heading-display-lg text-charcoal mb-8">
               Threads of Tradition,
               <br />
               <span className="text-wine-red">Styled for Today</span>
             </h1>
 
             {/* Micro-copy tagline */}
-            <p className="text-lg md:text-xl text-charcoal/75 mb-4 font-light italic">
+            <p className="text-lg md:text-xl text-charcoal/65 mb-6 font-light italic leading-relaxed">
               Hand-embroidered. Heart-approved.
             </p>
 
             {/* Body copy - constrained to readable line length */}
-            <p className="body-lg text-charcoal/70 max-w-xl mb-10 leading-relaxed">
+            <p className="body-lg text-charcoal/70 max-w-xl mb-12 leading-relaxed">
               Discover premium Indian embroidered clothing where traditional artistry meets modern minimalism. Each piece is a conversation between heritage and contemporary elegance.
             </p>
 
             {/* CTAs - Left-aligned below text */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
               <a 
                 href="/products" 
                 className="btn-primary text-center group relative overflow-hidden"
@@ -50,9 +50,9 @@ export default function Hero() {
             </div>
 
             {/* Trust indicator with elegant divider */}
-            <div className="pt-8 border-t border-charcoal/10">
-              <p className="label-text text-charcoal/50 mb-2">TRUSTED BY ARTISANS</p>
-              <p className="text-sm text-charcoal/60 italic">
+            <div className="pt-10 border-t border-charcoal/8">
+              <p className="label-text text-charcoal/45 mb-3 uppercase">TRUSTED BY ARTISANS</p>
+              <p className="text-sm text-charcoal/55 italic leading-relaxed">
                 Not mass-made. Soul-made.
               </p>
             </div>
@@ -61,7 +61,7 @@ export default function Hero() {
           {/* RIGHT COLUMN: IMAGE BLOCK */}
           <div className="animate-slide-up" style={{ animationDelay: '100ms' }}>
             {/* Editorial Image Rectangle - Vertical Format */}
-            <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-xl">
+            <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-700">
               <Image
                 src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&h=1000&fit=crop&q=85"
                 alt="Premium embroidered Indian fabric detail"
@@ -72,7 +72,7 @@ export default function Hero() {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* Subtle border for editorial feel */}
-              <div className="absolute inset-0 rounded-lg pointer-events-none border border-charcoal/5"></div>
+              <div className="absolute inset-0 rounded-lg pointer-events-none border border-charcoal/4"></div>
             </div>
           </div>
         </div>

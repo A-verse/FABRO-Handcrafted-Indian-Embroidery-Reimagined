@@ -66,15 +66,15 @@ body {
 
   /* ===== TYPOGRAPHY - BODY ===== */
   .body-lg {
-    @apply text-lg md:text-xl font-sans text-charcoal leading-relaxed;
+    @apply text-lg md:text-xl font-sans text-charcoal/90 leading-relaxed;
   }
 
   .body-base {
-    @apply text-base md:text-lg font-sans text-charcoal leading-relaxed;
+    @apply text-base md:text-lg font-sans text-charcoal/85 leading-relaxed;
   }
 
   .body-sm {
-    @apply text-sm md:text-base font-sans text-charcoal/80;
+    @apply text-sm md:text-base font-sans text-charcoal/70 leading-relaxed;
   }
 
   /* ===== TYPOGRAPHY - LABELS ===== */
@@ -88,15 +88,15 @@ body {
 
   /* ===== BUTTONS ===== */
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 font-medium transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maroon rounded-lg;
+    @apply inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 font-medium transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maroon rounded-lg;
   }
 
   .btn-primary {
-    @apply btn bg-maroon text-ivory hover:bg-wine-red active:bg-wine-red shadow-md hover:shadow-lg;
+    @apply btn bg-maroon text-ivory hover:bg-wine-red active:bg-wine-red shadow-md hover:shadow-lg active:shadow-md hover:-translate-y-0.5 transition-all;
   }
 
   .btn-secondary {
-    @apply btn border-2 border-maroon text-maroon hover:bg-maroon hover:text-ivory active:bg-wine-red active:border-wine-red shadow-sm hover:shadow-md;
+    @apply btn border-2 border-maroon text-maroon hover:bg-maroon hover:text-ivory active:bg-wine-red active:border-wine-red shadow-sm hover:shadow-md active:shadow-sm hover:-translate-y-0.5 transition-all;
   }
 
   .btn-tertiary {
@@ -104,11 +104,11 @@ body {
   }
 
   .btn-light {
-    @apply btn bg-ivory text-maroon border border-charcoal/10 hover:bg-muted-gold hover:border-charcoal/20;
+    @apply btn bg-ivory text-maroon border border-charcoal/10 hover:bg-muted-gold/10 hover:border-charcoal/20 transition-all;
   }
 
   .btn-dark {
-    @apply btn bg-maroon text-ivory hover:bg-wine-red;
+    @apply btn bg-maroon text-ivory hover:bg-wine-red transition-all;
   }
 
   /* ===== LINKS ===== */
@@ -149,40 +149,70 @@ body {
   /* ===== SECTIONS ===== */
   /* Section spacing - vertical rhythm with contained width */
   .section-spacing {
-    @apply py-16 sm:py-20 md:py-28 lg:py-32 px-0 sm:px-0;
+    @apply py-16 sm:py-20 md:py-28 lg:py-36 px-0 sm:px-0;
   }
 
   .section-spacing-lg {
-    @apply py-20 sm:py-28 md:py-36 lg:py-44 px-0 sm:px-0;
+    @apply py-24 sm:py-32 md:py-40 lg:py-48 px-0 sm:px-0;
   }
 
   .section-spacing-sm {
-    @apply py-12 sm:py-14 md:py-16 px-0 sm:px-0;
+    @apply py-12 sm:py-16 md:py-20 px-0 sm:px-0;
   }
 
-  .section-bg-alt {
-    @apply bg-ivory/40;
+  /* Section header spacing for consistent vertical rhythm */
+  .section-header {
+    @apply text-center max-w-3xl mx-auto mb-16 sm:mb-20 md:mb-28;
   }
 
-  .section-divider {
-    @apply h-px bg-gradient-to-r from-transparent via-muted-gold to-transparent;
+  .section-header-label {
+    @apply label-text text-charcoal/60 mb-4 tracking-widest block;
+  }
+
+  .section-header-h2 {
+    @apply heading-display-md mb-6;
+  }
+
+  .section-header-divider {
+    @apply inline-block h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full mb-6;
+  }
+
+  .section-header-desc {
+    @apply body-lg text-charcoal/75;
   }
 
   /* ===== ANIMATIONS ===== */
   .animate-fade-in {
-    animation: fade-in 0.6s ease-out;
+    animation: fade-in 0.8s ease-out;
   }
 
   .animate-slide-up {
-    animation: slide-up 0.7s ease-out;
+    animation: slide-up 0.9s cubic-bezier(0.4, 0.0, 0.2, 1);
   }
 
   .animate-slide-down {
-    animation: slide-down 0.7s ease-out;
+    animation: slide-down 0.9s cubic-bezier(0.4, 0.0, 0.2, 1);
   }
 
   .animate-scale-fade {
-    animation: scale-fade 0.6s ease-out;
+    animation: scale-fade 0.8s ease-out;
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-slide-down,
+    .animate-scale-fade {
+      animation: none;
+      opacity: 1;
+    }
+
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   /* ===== GRID UTILITIES ===== */
@@ -219,16 +249,13 @@ body {
     @apply object-cover object-center w-full h-full;
   }
 
-  .shadow-subtle {
-    @apply shadow-sm;
+  /* Consistent image polish */
+  .image-polish {
+    @apply rounded-lg overflow-hidden shadow-lg border border-charcoal/5;
   }
 
-  .shadow-medium {
-    @apply shadow-md;
-  }
-
-  .shadow-card {
-    @apply shadow-md border border-ivory;
+  .image-polish-sm {
+    @apply rounded-lg overflow-hidden shadow-md border border-charcoal/5;
   }
 
   /* ===== FORM ELEMENTS ===== */

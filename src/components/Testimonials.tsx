@@ -42,19 +42,20 @@ export default function Testimonials() {
       <div className="absolute bottom-20 left-10 w-64 h-64 bg-wine-red/5 rounded-full blur-3xl"></div>
 
       <div className="section-container relative z-10">
-        <div className="text-center mb-20 animate-slide-up">
-          <p className="label-text mb-4">WORDS FROM OUR COMMUNITY</p>
-          <h2 className="heading-display-md mb-6">Voices of Appreciation</h2>
-          <div className="flex justify-center">
-            <div className="h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full"></div>
+        <div className="section-header animate-slide-up">
+          <p className="section-header-label">WORDS FROM OUR COMMUNITY</p>
+          <h2 className="section-header-h2">Voices of Appreciation</h2>
+          <div className="flex justify-center mb-8">
+            <div className="section-header-divider"></div>
           </div>
+          <p className="section-header-desc">Customers share why they love FABRO.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="bg-white/80 backdrop-blur-sm rounded-lg border border-ivory p-7 md:p-8 hover:shadow-xl hover:bg-white transition-all duration-300 hover:-translate-y-1 animate-slide-up"
+              className="bg-white/85 backdrop-blur-sm rounded-lg border border-charcoal/5 p-8 md:p-9 hover:shadow-lg hover:bg-white transition-all duration-300 animate-slide-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Quote Mark */}
@@ -69,14 +70,14 @@ export default function Testimonials() {
               </div>
 
               {/* Quote Text */}
-              <p className="body-lg text-charcoal/85 mb-8 italic leading-relaxed">
+              <p className="body-base text-charcoal/80 mb-8 italic leading-relaxed">
                 "{testimonial.quote}"
               </p>
 
               {/* Author */}
-              <div className="border-t border-charcoal/10 pt-6">
-                <p className="heading-sm text-maroon mb-1">{testimonial.author}</p>
-                <p className="body-sm text-charcoal/60">{testimonial.role}</p>
+              <div className="border-t border-charcoal/8 pt-6">
+                <p className="heading-sm text-maroon mb-2">{testimonial.author}</p>
+                <p className="body-sm text-charcoal/55">{testimonial.role}</p>
               </div>
             </div>
           ))}

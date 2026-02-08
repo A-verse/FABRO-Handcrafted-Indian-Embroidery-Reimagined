@@ -43,13 +43,13 @@ export default function CraftProcess() {
       </div>
 
       <div className="section-container relative z-10">
-        <div className="text-center mb-24 animate-slide-up">
-          <p className="label-text mb-4">THE CRAFT</p>
-          <h2 className="heading-display-md mb-6">Journey of Creation</h2>
-          <div className="flex justify-center mb-6">
-            <div className="h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full"></div>
+        <div className="section-header animate-slide-up">
+          <p className="section-header-label">THE CRAFT</p>
+          <h2 className="section-header-h2">Journey of Creation</h2>
+          <div className="flex justify-center mb-8">
+            <div className="section-header-divider"></div>
           </div>
-          <p className="body-lg text-charcoal/70 max-w-2xl mx-auto">
+          <p className="section-header-desc">
             From concept to completion, every step honors both tradition and your vision.
           </p>
         </div>

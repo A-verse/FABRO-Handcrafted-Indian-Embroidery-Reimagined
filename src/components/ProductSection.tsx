@@ -21,9 +21,9 @@ export default function ProductSectionDisplay({ section, title, description }: P
       {/* Content Container - Centered, Constrained */}
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="mb-12">
-          <h2 className="heading-xl text-charcoal mb-3">{title}</h2>
-          <div className="inline-block h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full mb-4" />
+        <div className="mb-16">
+          <h2 className="heading-xl text-charcoal mb-4">{title}</h2>
+          <div className="inline-block h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full mb-5" />
           <p className="body-lg text-charcoal/70 max-w-2xl">{description}</p>
         </div>
 

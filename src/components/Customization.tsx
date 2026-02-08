@@ -22,7 +22,7 @@ export default function CustomizationHighlight() {
           <div className="relative order-2 lg:order-1 animate-slide-up" style={{ animationDelay: '200ms' }}>
             <div className="grid grid-cols-2 gap-4">
               {/* Main large image */}
-              <div className="col-span-2 aspect-[4/3] rounded-lg overflow-hidden shadow-xl">
+              <div className="col-span-2 aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-700 border border-charcoal/5">
                 <Image
                   src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&h=600&fit=crop&q=80"
                   alt="Hand embroidery process"
@@ -33,7 +33,7 @@ export default function CustomizationHighlight() {
               </div>
               
               {/* Two smaller images */}
-              <div className="aspect-square rounded-lg overflow-hidden shadow-lg">
+              <div className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-700 border border-charcoal/5">
                 <Image
                   src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop&q=80"
                   alt="Embroidered fabric detail"
@@ -42,7 +42,7 @@ export default function CustomizationHighlight() {
                   sizes="(max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="aspect-square rounded-lg overflow-hidden shadow-lg">
+              <div className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-700 border border-charcoal/5">
                 <Image
                   src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&h=400&fit=crop&q=80"
                   alt="Thread selection"
@@ -54,28 +54,28 @@ export default function CustomizationHighlight() {
             </div>
 
             {/* Floating badge */}
-            <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-2xl p-6 border border-muted-gold/20">
-              <p className="text-sm text-charcoal/60 mb-1">Crafted with care</p>
+            <div className="absolute -bottom-6 -right-6 bg-white rounded-lg shadow-xl p-6 border border-charcoal/8">
+              <p className="text-sm text-charcoal/55 mb-2 tracking-wide">CRAFTED WITH CARE</p>
               <p className="heading-sm text-wine-red">100% Handmade</p>
             </div>
           </div>
 
           {/* Content */}
           <div className="flex flex-col justify-center order-1 lg:order-2 animate-slide-up">
-            <p className="label-text mb-4">BESPOKE SERVICE</p>
+            <p className="label-text text-charcoal/60 mb-6">BESPOKE SERVICE</p>
 
-            <h2 className="heading-display-md mb-6">
+            <h2 className="heading-display-md mb-8">
               Your Design,
               <br />
               <span className="text-wine-red">Perfectly Crafted</span>
             </h2>
 
-            <p className="body-lg text-charcoal/80 mb-8">
+            <p className="body-lg text-charcoal/75 mb-10 leading-relaxed">
               Envision an embroidered piece that's uniquely yours. Commission a bespoke design from our master artisans. From color palettes to intricate motifs, every detail is customizable.
             </p>
 
             {/* Why choose custom */}
-            <div className="space-y-5 mb-10">
+            <div className="space-y-5 mb-12">
               {[
                 "Work directly with design specialists",
                 "Choose your fabric, colors, and embroidery style",
@@ -86,7 +86,7 @@ export default function CustomizationHighlight() {
                   <svg className="w-5 h-5 text-wine-red flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="body-base text-charcoal">{item}</span>
+                  <span className="body-base text-charcoal/80">{item}</span>
                 </div>
               ))}
             </div>

@@ -72,23 +72,23 @@ export default function ContactSection() {
 
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20 animate-slide-up">
-          <p className="label-text mb-4">CONNECT WITH US</p>
-          <h2 className="heading-display-sm text-charcoal mb-6">Get in Touch</h2>
+        <div className="section-header animate-slide-up">
+          <p className="section-header-label">CONNECT WITH US</p>
+          <h2 className="heading-display-md text-charcoal mb-6">Get in Touch</h2>
           <div className="flex justify-center mb-8">
-            <div className="h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full"></div>
+            <div className="section-header-divider"></div>
           </div>
-          <p className="body-lg text-charcoal/70">
-            Have questions about our products, custom orders, or wholesale opportunities? Reach out now!
+          <p className="section-header-desc">
+            Have questions about our products or custom orders? Reach out now!
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
           {/* WhatsApp Card */}
-          <div className="bg-white/80 backdrop-blur-sm border border-ivory rounded-lg p-8 text-center shadow-card hover:shadow-xl hover:bg-white transition-all duration-300 group">
-            <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">💬</div>
-            <h3 className="heading-sm text-charcoal mb-3">WhatsApp (Fastest)</h3>
-            <p className="body-sm text-charcoal/70 mb-8">Quick responses, direct with FABRO team</p>
+          <div className="bg-white/85 backdrop-blur-sm border border-charcoal/5 rounded-lg p-10 text-center shadow-md hover:shadow-lg transition-all duration-300 group">
+            <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">💬</div>
+            <h3 className="heading-sm text-charcoal mb-2">WhatsApp</h3>
+            <p className="body-sm text-charcoal/60 mb-10">(Fastest Response)</p>
             <button
               onClick={handleWhatsAppDirect}
               className="w-full btn-primary py-3 transition-all duration-200 font-medium"
@@ -98,26 +98,26 @@ export default function ContactSection() {
           </div>
 
           {/* Email Card */}
-          <div className="bg-white border border-ivory rounded-lg p-8 text-center shadow-card hover:shadow-lg transition-all duration-300 group">
-            <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">✉️</div>
-            <h3 className="heading-sm text-charcoal mb-3">Email</h3>
-            <p className="body-sm text-charcoal/70 mb-4">hello@fabro.in</p>
+          <div className="bg-white/85 backdrop-blur-sm border border-charcoal/5 rounded-lg p-10 text-center shadow-md hover:shadow-lg transition-all duration-300 group">
+            <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">✉️</div>
+            <h3 className="heading-sm text-charcoal mb-2">Email</h3>
+            <p className="body-sm text-charcoal/60 mb-10">hello@fabro.in</p>
             <button
               onClick={handleEmailDirect}
-              className="w-full btn-secondary py-3 rounded-lg transition-all duration-200 hover:shadow-md font-medium"
+              className="w-full btn-secondary py-3 rounded-lg transition-all duration-200 font-medium"
             >
               Send Email
             </button>
           </div>
 
           {/* Contact Info Card */}
-          <div className="bg-gradient-to-br from-maroon/5 to-wine-red/5 border border-muted-gold rounded-lg p-8 shadow-card hover:shadow-lg transition-all duration-300">
+          <div className="bg-white/85 backdrop-blur-sm border border-charcoal/5 rounded-lg p-10 shadow-md hover:shadow-lg transition-all duration-300">
             <div className="text-5xl mb-6">📍</div>
-            <h3 className="heading-sm text-charcoal mb-6">Other Ways to Reach</h3>
-            <ul className="space-y-4 body-sm text-charcoal/80">
-              <li className="pb-4 border-b border-muted-gold/30">
-                <span className="font-medium text-wine-red block">WhatsApp:</span>
-                <span className="text-charcoal/60">+91 8852 808 522</span>
+            <h3 className="heading-sm text-charcoal mb-8">Other Ways</h3>
+            <ul className="space-y-5 body-sm text-charcoal/75">
+              <li className="pb-5 border-b border-charcoal/10">
+                <span className="font-medium text-wine-red block mb-1">WhatsApp:</span>
+                <span className="text-charcoal/60 text-sm">+91 8852 808 522</span>
               </li>
               <li className="pb-4 border-b border-muted-gold/30">
                 <span className="font-medium text-wine-red block">Email:</span>

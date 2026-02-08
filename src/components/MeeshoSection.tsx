@@ -5,18 +5,20 @@ export default function MeeshoSection() {
     <section className="section-spacing-lg bg-ivory">
       <div className="section-container">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 animate-slide-up">
-          <p className="label-text mb-4">ALSO AVAILABLE ON</p>
-          <h2 className="heading-display-sm text-charcoal mb-4">Find Us on Meesho</h2>
-          <div className="flex justify-center mb-6">
-            <div className="h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full"></div>
+        <div className="section-header animate-slide-up">
+          <p className="section-header-label">ALSO AVAILABLE ON</p>
+          <h2 className="heading-display-md mb-6">Find Us on Meesho</h2>
+          <div className="flex justify-center mb-8">
+            <div className="section-header-divider"></div>
           </div>
-          <p className="body-lg text-charcoal/70 italic mb-2">
-            Made slow, found fast.
-          </p>
-          <p className="body-base text-charcoal/60">
-            Shop authentic hand-embroidered pieces on India's largest social commerce platform
-          </p>
+          <div className="max-w-2xl mx-auto">
+            <p className="section-header-desc mb-4">
+              Shop authentic hand-embroidered pieces on India's largest social commerce platform.
+            </p>
+            <p className="body-base text-charcoal/60 italic">
+              Made slow, found fast.
+            </p>
+          </div>
         </div>
 
         {/* Main Card */}

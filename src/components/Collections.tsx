@@ -42,13 +42,13 @@ export default function Collections() {
     <section id="collections" className="section-spacing-lg bg-ivory">
       <div className="section-container">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-24 animate-slide-up">
-          <p className="label-text mb-4">COLLECTIONS</p>
-          <h2 className="heading-display-md mb-6">Curated for Every Moment</h2>
+        <div className="section-header animate-slide-up">
+          <p className="section-header-label">COLLECTIONS</p>
+          <h2 className="section-header-h2">Curated for Every Moment</h2>
           <div className="flex justify-center mb-8">
-            <div className="h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full"></div>
+            <div className="section-header-divider"></div>
           </div>
-          <p className="body-lg text-charcoal/70">
+          <p className="section-header-desc">
             Explore our thoughtfully curated collections, each celebrating different facets of Indian embroidery artistry.
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function Collections() {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Collection Image - Portrait Ratio for Editorial Feel */}
-              <div className="aspect-[3/4] rounded-lg overflow-hidden mb-6 relative shadow-card hover:shadow-xl transition-all duration-500">
+              <div className="aspect-[3/4] rounded-lg overflow-hidden mb-8 relative shadow-lg hover:shadow-xl transition-all duration-500 border border-charcoal/5">
                 <Image
                   src={collection.image}
                   alt={collection.title}
@@ -72,7 +72,7 @@ export default function Collections() {
                   quality={85}
                 />
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 {/* Micro-copy on Hover */}
                 <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
@@ -82,15 +82,15 @@ export default function Collections() {
 
               {/* Content */}
               <div>
-                <h3 className="heading-md text-charcoal mb-3 group-hover:text-wine-red transition-colors">
+                <h3 className="heading-md text-charcoal mb-4 group-hover:text-wine-red transition-colors">
                   {collection.title}
                 </h3>
 
-                <p className="body-sm text-charcoal/70 mb-4">
+                <p className="body-sm text-charcoal/70 mb-5">
                   {collection.description}
                 </p>
 
-                <p className="label-accent mb-6">{collection.accent}</p>
+                <p className="label-accent mb-7 text-charcoal/70">{collection.accent}</p>
 
                 <a href="/products" className="link-arrow font-medium text-sm">
                   View Collection →
