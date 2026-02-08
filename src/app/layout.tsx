@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { AdminProvider } from "@/context/AdminContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -37,11 +38,13 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-ivory text-charcoal font-sans antialiased">
-        <CartProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </CartProvider>
+        <AdminProvider>
+          <CartProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </CartProvider>
+        </AdminProvider>
       </body>
     </html>
   );
