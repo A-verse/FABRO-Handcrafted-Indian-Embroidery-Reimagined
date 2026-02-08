@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { generateOrderId, storeOrder, generateWhatsAppMessage } from '@/utils/orderUtils';
 
 export default function CheckoutPage() {
   const { items, totalPrice, clearCart } = useCart();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,47 +23,107 @@ export default function CheckoutPage() {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: { [key: string]: string } = {};
+
+    // Validate required fields
+    if (!formData.name.trim()) newErrors.name = 'Full name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.address.trim()) newErrors.address = 'Address is required';
+    if (!formData.city.trim()) newErrors.city = 'City is required';
+    if (!formData.state.trim()) newErrors.state = 'State is required';
+    if (!formData.pincode.trim()) newErrors.pincode = 'PIN code is required';
+
+    // Validate phone number (basic check)
+    if (formData.phone.trim() && !/^[0-9]{10}$/.test(formData.phone.replace(/\D/g, ''))) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    }
+
+    // Validate email
+    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Validate PIN code (6 digits)
+    if (formData.pincode.trim() && !/^[0-9]{6}$/.test(formData.pincode)) {
+      newErrors.pincode = 'Please enter a valid 6-digit PIN code';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setIsProcessing(true);
 
-    // Format order message for WhatsApp
-    const orderItems = items
-      .map((item) => `${item.name} (x${item.quantity}) - ₹${item.price * item.quantity}`)
-      .join('%0A');
+    try {
+      // Generate unique order ID
+      const orderId = generateOrderId();
 
-    const whatsappMessage = `🛍️ NEW ORDER from ${formData.name}%0A%0A` +
-      `📦 ITEMS:%0A${orderItems}%0A%0A` +
-      `💰 Total: ₹${totalPrice.toLocaleString()}%0A%0A` +
-      `📍 DELIVERY DETAILS:%0A` +
-      `Name: ${formData.name}%0A` +
-      `Phone: ${formData.phone}%0A` +
-      `Email: ${formData.email}%0A` +
-      `Address: ${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}%0A%0A` +
-      `📝 Notes: ${formData.notes || 'None'}%0A%0A` +
-      `Payment: Cash on Delivery`;
+      // Create order object
+      const order = {
+        orderId,
+        customerName: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        pincode: formData.pincode,
+        notes: formData.notes,
+        items: items.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+        })),
+        totalPrice,
+        paymentMethod: 'COD' as const,
+        createdAt: new Date().toISOString(),
+      };
 
-    // Send to WhatsApp
-    window.open(`https://wa.me/8852808522?text=${whatsappMessage}`, '_blank');
+      // Store order
+      storeOrder(order);
 
-    // Send email confirmation (mailto fallback)
-    const emailBody = `New Order from ${formData.name}\n\nItems:\n${items.map(i => `${i.name} (x${i.quantity})`).join('\n')}\n\nTotal: ₹${totalPrice}\n\nDelivery Details:\n${formData.name}\n${formData.address}\n${formData.city}, ${formData.state} - ${formData.pincode}\nPhone: ${formData.phone}`;
-    
-    setTimeout(() => {
-      window.location.href = `mailto:hello@fabro.in?subject=FABRO Order Confirmation&body=${encodeURIComponent(emailBody)}`;
-    }, 1000);
-
-    // Clear cart and redirect after delay
-    setTimeout(() => {
+      // Clear cart after successful order placement
       clearCart();
-      router.push('/order-confirmation');
-    }, 2000);
+
+      // Optional: Generate WhatsApp message for user
+      const whatsappMessage = generateWhatsAppMessage(order);
+      
+      // Store WhatsApp message for optional use on confirmation page
+      sessionStorage.setItem('whatsapp-message', whatsappMessage);
+      sessionStorage.setItem('whatsapp-phone', '8852808522');
+
+      // Redirect to order confirmation with order ID
+      router.push(`/order-confirmation?orderId=${orderId}`);
+    } catch (error) {
+      console.error('Error placing order:', error);
+      setErrors({ form: 'An error occurred while placing your order. Please try again.' });
+      setIsProcessing(false);
+    }
   };
 
   if (items.length === 0) {
@@ -81,7 +143,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="min-h-screen pt-24 pb-16 bg-gradient-to-b from-ivory to-ivory/50">
+    <main className="min-h-screen pt-24 pb-16 bg-ivory">
       <div className="section-container">
         {/* Header */}
         <div className="mb-12 text-center">
@@ -91,12 +153,19 @@ export default function CheckoutPage() {
           </p>
         </div>
 
+        {/* Form Errors */}
+        {errors.form && (
+          <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+            {errors.form}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Checkout Form */}
           <div className="lg:col-span-2">
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Contact Information */}
-              <div className="bg-white rounded-lg border border-ivory p-8 shadow-card">
+              <div className="bg-white rounded-lg border border-charcoal/5 p-8 shadow-md">
                 <h2 className="heading-md mb-6">Contact Information</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -106,9 +175,12 @@ export default function CheckoutPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      required
-                      className="input-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all ${
+                        errors.name ? 'border-red-400 bg-red-50' : 'border-charcoal/10'
+                      }`}
+                      placeholder="John Doe"
                     />
+                    {errors.name && <p className="text-red-600 text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <label className="label-text block mb-2">Phone Number *</label>
@@ -117,9 +189,12 @@ export default function CheckoutPage() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      required
-                      className="input-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all ${
+                        errors.phone ? 'border-red-400 bg-red-50' : 'border-charcoal/10'
+                      }`}
+                      placeholder="9876543210"
                     />
+                    {errors.phone && <p className="text-red-600 text-xs mt-1">{errors.phone}</p>}
                   </div>
                   <div className="md:col-span-2">
                     <label className="label-text block mb-2">Email Address *</label>
@@ -128,15 +203,18 @@ export default function CheckoutPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
-                      className="input-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all ${
+                        errors.email ? 'border-red-400 bg-red-50' : 'border-charcoal/10'
+                      }`}
+                      placeholder="you@example.com"
                     />
+                    {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
                   </div>
                 </div>
               </div>
 
               {/* Delivery Address */}
-              <div className="bg-white rounded-lg border border-ivory p-8 shadow-card">
+              <div className="bg-white rounded-lg border border-charcoal/5 p-8 shadow-md">
                 <h2 className="heading-md mb-6">Delivery Address</h2>
                 <div className="space-y-6">
                   <div>
@@ -146,9 +224,12 @@ export default function CheckoutPage() {
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
-                      required
-                      className="input-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20"
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all ${
+                        errors.address ? 'border-red-400 bg-red-50' : 'border-charcoal/10'
+                      }`}
+                      placeholder="123 Main Street"
                     />
+                    {errors.address && <p className="text-red-600 text-xs mt-1">{errors.address}</p>}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
@@ -158,9 +239,12 @@ export default function CheckoutPage() {
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
-                        required
-                        className="input-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all ${
+                          errors.city ? 'border-red-400 bg-red-50' : 'border-charcoal/10'
+                        }`}
+                        placeholder="Mumbai"
                       />
+                      {errors.city && <p className="text-red-600 text-xs mt-1">{errors.city}</p>}
                     </div>
                     <div>
                       <label className="label-text block mb-2">State *</label>
@@ -169,9 +253,12 @@ export default function CheckoutPage() {
                         name="state"
                         value={formData.state}
                         onChange={handleChange}
-                        required
-                        className="input-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all ${
+                          errors.state ? 'border-red-400 bg-red-50' : 'border-charcoal/10'
+                        }`}
+                        placeholder="Maharashtra"
                       />
+                      {errors.state && <p className="text-red-600 text-xs mt-1">{errors.state}</p>}
                     </div>
                     <div>
                       <label className="label-text block mb-2">PIN Code *</label>
@@ -180,10 +267,12 @@ export default function CheckoutPage() {
                         name="pincode"
                         value={formData.pincode}
                         onChange={handleChange}
-                        required
-                        pattern="[0-9]{6}"
-                        className="input-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20"
+                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all ${
+                          errors.pincode ? 'border-red-400 bg-red-50' : 'border-charcoal/10'
+                        }`}
+                        placeholder="400001"
                       />
+                      {errors.pincode && <p className="text-red-600 text-xs mt-1">{errors.pincode}</p>}
                     </div>
                   </div>
                   <div>
@@ -193,7 +282,7 @@ export default function CheckoutPage() {
                       value={formData.notes}
                       onChange={handleChange}
                       rows={3}
-                      className="textarea-base w-full px-4 py-3 border border-ivory rounded-lg focus:border-wine-red focus:ring-2 focus:ring-wine-red/20 resize-none"
+                      className="w-full px-4 py-3 border border-charcoal/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-wine-red/20 transition-all resize-none"
                       placeholder="Any special instructions or preferences..."
                     />
                   </div>
@@ -226,27 +315,27 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={isProcessing}
-                className="btn-primary w-full py-4 text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary w-full py-4 text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
-                {isProcessing ? 'Processing Order...' : 'Place Order via WhatsApp'}
+                {isProcessing ? 'Processing Order...' : 'Place Order'}
               </button>
 
               <p className="text-xs text-center text-charcoal/60 italic">
-                By placing this order, you agree to our terms and conditions. We'll confirm your order via WhatsApp and email.
+                By placing this order, you agree to our terms and conditions. We'll confirm your order details shortly.
               </p>
             </form>
           </div>
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg border border-ivory p-8 shadow-card sticky top-24">
+            <div className="bg-white rounded-lg border border-charcoal/5 p-8 shadow-md sticky top-24">
               <h2 className="heading-md mb-6">Order Summary</h2>
 
               {/* Items */}
               <div className="space-y-4 mb-6 max-h-64 overflow-y-auto">
                 {items.map((item) => (
                   <div key={item.id} className="flex gap-4">
-                    <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-ivory flex-shrink-0">
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-ivory flex-shrink-0 border border-charcoal/5">
                       <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1">
@@ -270,13 +359,13 @@ export default function CheckoutPage() {
                   <span>Shipping</span>
                   <span className="text-green-600 font-medium">Free</span>
                 </div>
-                <div className="flex justify-between text-lg font-bold text-charcoal pt-3 border-t border-ivory">
+                <div className="flex justify-between text-lg font-bold text-charcoal pt-3 border-t border-charcoal/5">
                   <span>Total</span>
                   <span>₹{totalPrice.toLocaleString()}</span>
                 </div>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-ivory">
+              <div className="mt-6 pt-6 border-t border-charcoal/5">
                 <p className="text-xs text-charcoal/60 text-center italic">
                   Hand-embroidered. Heart-approved.
                 </p>
@@ -288,3 +377,4 @@ export default function CheckoutPage() {
     </main>
   );
 }
+        {/* Header */}
