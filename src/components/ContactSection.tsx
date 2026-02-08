@@ -55,7 +55,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="section-spacing-lg bg-gradient-to-b from-ivory/40 to-ivory/20 relative overflow-hidden">
+    <section className="section-spacing-lg bg-ivory relative overflow-hidden">
       {/* Background imagery */}
       <div className="absolute inset-0 opacity-[0.03]">
         <Image

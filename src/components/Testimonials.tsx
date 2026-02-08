@@ -25,7 +25,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="section-spacing-lg bg-gradient-to-b from-ivory to-off-white/50 relative overflow-hidden">
+    <section className="section-spacing-lg bg-ivory relative overflow-hidden">
       {/* Background fabric texture */}
       <div className="absolute inset-0 opacity-[0.04]">
         <Image

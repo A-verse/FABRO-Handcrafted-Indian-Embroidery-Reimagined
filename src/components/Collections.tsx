@@ -39,7 +39,7 @@ const collections = [
 
 export default function Collections() {
   return (
-    <section id="collections" className="section-spacing-lg bg-gradient-to-b from-ivory/40 to-ivory/20">
+    <section id="collections" className="section-spacing-lg bg-ivory">
       <div className="section-container">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-24 animate-slide-up">

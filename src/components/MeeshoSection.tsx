@@ -2,7 +2,7 @@
 
 export default function MeeshoSection() {
   return (
-    <section className="section-spacing-lg bg-gradient-to-b from-ivory/40 to-ivory/20">
+    <section className="section-spacing-lg bg-ivory">
       <div className="section-container">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 animate-slide-up">

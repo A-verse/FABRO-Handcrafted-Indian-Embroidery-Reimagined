@@ -16,7 +16,7 @@ export default function CustomizationHighlight() {
         />
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="section-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image Grid */}
           <div className="relative order-2 lg:order-1 animate-slide-up" style={{ animationDelay: '200ms' }}>

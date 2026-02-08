@@ -18,17 +18,25 @@ body {
 }
 
 @layer components {
-  /* ===== CONTAINERS ===== */
+  /* ===== CONTAINERS - EDITORIAL GRID SYSTEM ===== */
+  /* Centered container with max-width 1280px for editorial layouts */
   .container-custom {
-    @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
+    @apply mx-auto w-full max-w-[1280px] px-6 sm:px-8 md:px-10 lg:px-12;
   }
 
+  /* Full-width container for background elements (can extend to screen edges) */
   .container-full {
     @apply w-full max-w-none;
   }
 
+  /* Standard section container - centered, constrained width, consistent padding */
   .section-container {
-    @apply mx-auto max-w-7xl px-6 sm:px-8 lg:px-12;
+    @apply mx-auto w-full max-w-[1280px] px-6 sm:px-8 md:px-10 lg:px-12;
+  }
+
+  /* Smaller container for narrow content (e.g., text-focused sections) */
+  .container-text {
+    @apply mx-auto w-full max-w-2xl px-6 sm:px-8 md:px-10 lg:px-12;
   }
 
   /* ===== TYPOGRAPHY - HEADINGS ===== */
@@ -139,16 +147,17 @@ body {
   }
 
   /* ===== SECTIONS ===== */
+  /* Section spacing - vertical rhythm with contained width */
   .section-spacing {
-    @apply py-16 sm:py-20 md:py-28 lg:py-32 px-6 sm:px-8 lg:px-10;
+    @apply py-16 sm:py-20 md:py-28 lg:py-32 px-0 sm:px-0;
   }
 
   .section-spacing-lg {
-    @apply py-20 sm:py-28 md:py-36 lg:py-44 px-6 sm:px-8 lg:px-10;
+    @apply py-20 sm:py-28 md:py-36 lg:py-44 px-0 sm:px-0;
   }
 
   .section-spacing-sm {
-    @apply py-12 sm:py-14 md:py-16 px-6 sm:px-8 lg:px-10;
+    @apply py-12 sm:py-14 md:py-16 px-0 sm:px-0;
   }
 
   .section-bg-alt {

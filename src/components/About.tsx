@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function About() {
   return (
-    <section id="about" className="section-spacing bg-gradient-to-b from-ivory to-ivory/50 relative overflow-hidden">
+    <section id="about" className="section-spacing bg-ivory relative overflow-hidden">
       {/* Subtle background elements */}
       <div className="absolute top-20 right-10 w-80 h-80 bg-muted-gold/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 left-10 w-80 h-80 bg-wine-red/5 rounded-full blur-3xl"></div>

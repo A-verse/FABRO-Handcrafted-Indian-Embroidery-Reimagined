@@ -70,7 +70,7 @@ export default function ExtendedTestimonials() {
   );
 
   return (
-    <section className="section-spacing bg-gradient-to-b from-ivory/30 to-transparent py-24 relative overflow-hidden">
+    <section className="section-spacing py-24 bg-ivory relative overflow-hidden">
       {/* Background texture */}
       <div className="absolute inset-0 opacity-[0.03]">
         <Image
@@ -85,7 +85,7 @@ export default function ExtendedTestimonials() {
       <div className="absolute top-40 left-20 w-72 h-72 bg-wine-red/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 right-20 w-72 h-72 bg-muted-gold/10 rounded-full blur-3xl"></div>
 
-      <div className="relative z-10">
+      <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="heading-xl text-charcoal mb-3">Voices of Our Community</h2>

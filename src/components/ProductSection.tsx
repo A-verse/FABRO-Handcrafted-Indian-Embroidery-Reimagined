@@ -13,12 +13,13 @@ export default function ProductSectionDisplay({ section, title, description }: P
   const sectionProducts = getProductsBySection(section);
 
   return (
-    <section className="section-spacing relative overflow-hidden">
-      {/* Subtle background decoration */}
-      <div className="absolute top-10 right-10 w-64 h-64 bg-muted-gold/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-10 left-10 w-64 h-64 bg-wine-red/5 rounded-full blur-3xl"></div>
+    <section className="section-spacing relative overflow-hidden bg-ivory">
+      {/* Subtle background decoration - positioned within natural bounds */}
+      <div className="absolute top-10 right-1/2 translate-x-1/3 w-64 h-64 bg-muted-gold/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/3 w-64 h-64 bg-wine-red/5 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="relative z-10">
+      {/* Content Container - Centered, Constrained */}
+      <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="mb-12">
           <h2 className="heading-xl text-charcoal mb-3">{title}</h2>

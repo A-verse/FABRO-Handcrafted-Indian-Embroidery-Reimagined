@@ -35,7 +35,7 @@ const process_steps = [
 
 export default function CraftProcess() {
   return (
-    <section id="process" className="section-spacing-lg bg-gradient-to-b from-ivory/30 to-ivory/10 relative overflow-hidden">
+    <section id="process" className="section-spacing-lg bg-ivory relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute top-0 left-0 w-96 h-96 bg-wine-red rounded-full blur-3xl"></div>
