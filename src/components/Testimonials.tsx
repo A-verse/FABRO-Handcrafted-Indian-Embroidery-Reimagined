@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 const testimonials = [
   {
     id: 1,
@@ -23,8 +25,23 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="section-spacing-lg bg-gradient-to-b from-ivory to-off-white/50">
-      <div className="section-container">
+    <section className="section-spacing-lg bg-gradient-to-b from-ivory to-off-white/50 relative overflow-hidden">
+      {/* Background fabric texture */}
+      <div className="absolute inset-0 opacity-[0.04]">
+        <Image
+          src="https://images.unsplash.com/photo-1585487000714-f23d5a6f97c4?w=1920&h=1080&fit=crop&q=60"
+          alt="Fabric texture background"
+          fill
+          className="object-cover"
+          priority={false}
+        />
+      </div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-20 right-10 w-64 h-64 bg-muted-gold/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-64 h-64 bg-wine-red/5 rounded-full blur-3xl"></div>
+
+      <div className="section-container relative z-10">
         <div className="text-center mb-20 animate-slide-up">
           <p className="label-text mb-4">WORDS FROM OUR COMMUNITY</p>
           <h2 className="heading-display-md mb-6">Voices of Appreciation</h2>
@@ -37,7 +54,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={testimonial.id}
-              className="bg-white rounded-lg border border-ivory p-7 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-slide-up"
+              className="bg-white/80 backdrop-blur-sm rounded-lg border border-ivory p-7 md:p-8 hover:shadow-xl hover:bg-white transition-all duration-300 hover:-translate-y-1 animate-slide-up"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Quote Mark */}

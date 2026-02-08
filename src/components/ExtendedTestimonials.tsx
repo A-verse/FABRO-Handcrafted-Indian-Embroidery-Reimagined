@@ -1,5 +1,7 @@
 "use client";
 
+import Image from 'next/image';
+
 interface Testimonial {
   quote: string;
   author: string;
@@ -51,7 +53,7 @@ export default function ExtendedTestimonials() {
   ];
 
   const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
-    <div className="bg-white p-8 rounded-lg border border-ivory hover:shadow-lg transition-all duration-300">
+    <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg border border-ivory hover:shadow-xl hover:bg-white transition-all duration-300">
       {/* Quote Mark */}
       <div className="text-4xl text-gold opacity-60 mb-4">&#8220;</div>
 
@@ -68,62 +70,78 @@ export default function ExtendedTestimonials() {
   );
 
   return (
-    <section className="section-spacing bg-gradient-to-b from-ivory/30 to-transparent py-24">
-      {/* Section Header */}
-      <div className="text-center mb-16">
-        <h2 className="heading-xl text-charcoal mb-3">Voices of Our Community</h2>
-        <div className="flex justify-center mb-4">
-          <div className="h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full" />
-        </div>
-        <p className="body-lg text-charcoal/70 max-w-2xl mx-auto">
-          From India to around the world, customers share why they love FABRO
-        </p>
+    <section className="section-spacing bg-gradient-to-b from-ivory/30 to-transparent py-24 relative overflow-hidden">
+      {/* Background texture */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <Image
+          src="https://images.unsplash.com/photo-1542272604-787c62d465d1?w=1920&h=1080&fit=crop&q=60"
+          alt="Embroidered fabric texture"
+          fill
+          className="object-cover"
+        />
       </div>
 
-      {/* Indian Testimonials Section */}
-      <div className="mb-16">
-        <div className="mb-8 pb-6 border-b-2 border-muted-gold">
-          <h3 className="heading-md text-maroon mb-2">From Our Hearts</h3>
-          <p className="body-sm text-charcoal/70">Voices from India celebrating heritage and craftsmanship</p>
+      {/* Decorative blurs */}
+      <div className="absolute top-40 left-20 w-72 h-72 bg-wine-red/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-40 right-20 w-72 h-72 bg-muted-gold/10 rounded-full blur-3xl"></div>
+
+      <div className="relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="heading-xl text-charcoal mb-3">Voices of Our Community</h2>
+          <div className="flex justify-center mb-4">
+            <div className="h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full" />
+          </div>
+          <p className="body-lg text-charcoal/70 max-w-2xl mx-auto">
+            From India to around the world, customers share why they love FABRO
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {indianTestimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} testimonial={testimonial} />
-          ))}
-        </div>
-      </div>
+        {/* Indian Testimonials Section */}
+        <div className="mb-16">
+          <div className="mb-8 pb-6 border-b-2 border-muted-gold">
+            <h3 className="heading-md text-maroon mb-2">From Our Hearts</h3>
+            <p className="body-sm text-charcoal/70">Voices from India celebrating heritage and craftsmanship</p>
+          </div>
 
-      {/* Divider */}
-      <div className="h-1 bg-gradient-to-r from-transparent via-muted-gold to-transparent my-12" />
-
-      {/* International Testimonials Section */}
-      <div>
-        <div className="mb-8 pb-6 border-b-2 border-muted-gold">
-          <h3 className="heading-md text-wine-red mb-2">From Around the World</h3>
-          <p className="body-sm text-charcoal/70">International customers discovering the art of Indian embroidery</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {indianTestimonials.map((testimonial, index) => (
+              <TestimonialCard key={index} testimonial={testimonial} />
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {internationalTestimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} testimonial={testimonial} />
-          ))}
-        </div>
-      </div>
+        {/* Divider */}
+        <div className="h-1 bg-gradient-to-r from-transparent via-muted-gold to-transparent my-12" />
 
-      {/* CTA Section */}
-      <div className="text-center mt-16 pt-12 border-t-2 border-ivory">
-        <p className="body-lg text-charcoal/70 mb-6">Have a FABRO story to share?</p>
-        <button
-          onClick={() => {
-            const message =
-              "Hello! I'd like to share my FABRO experience and review.";
-            window.open(`https://wa.me/8852808522?text=${encodeURIComponent(message)}`, "_blank");
-          }}
-          className="btn-primary px-8 py-3 rounded-md transition-all duration-200"
-        >
-          Share Your Story
-        </button>
+        {/* International Testimonials Section */}
+        <div>
+          <div className="mb-8 pb-6 border-b-2 border-muted-gold">
+            <h3 className="heading-md text-wine-red mb-2">From Around the World</h3>
+            <p className="body-sm text-charcoal/70">International customers discovering the art of Indian embroidery</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {internationalTestimonials.map((testimonial, index) => (
+              <TestimonialCard key={index} testimonial={testimonial} />
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center mt-16 pt-12 border-t-2 border-ivory">
+          <p className="body-lg text-charcoal/70 mb-6">Have a FABRO story to share?</p>
+          <button
+            onClick={() => {
+              const message =
+                "Hello! I'd like to share my FABRO experience and review.";
+              window.open(`https://wa.me/8852808522?text=${encodeURIComponent(message)}`, "_blank");
+            }}
+            className="btn-primary px-8 py-3 transition-all duration-200"
+          >
+            Share Your Story
+          </button>
+        </div>
       </div>
     </section>
   );

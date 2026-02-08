@@ -6,7 +6,6 @@ import { useState } from "react";
 import { getProductById, getReviewsByProductId, getAverageRating } from "@/data/products";
 import ProductReviews from "@/components/ProductReviews";
 import { useCart } from "@/context/CartContext";
-import { useRouter } from "next/navigation";
 
 interface ProductDetailPageProps {
   params: {
@@ -15,7 +14,7 @@ interface ProductDetailPageProps {
 }
 
 // Helper function to get product images
-function getProductImages(category: string, productId: number) {
+function getProductImages(category: string, _productId: number) {
   const imageMap: Record<string, string[]> = {
     Kurtis: [
       "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800&h=800&fit=crop",
@@ -58,7 +57,6 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   const productReviews = product ? getReviewsByProductId(product.id) : [];
   const averageRating = getAverageRating(productReviews);
   const { addToCart } = useCart();
-  const router = useRouter();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -99,12 +97,6 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     const message = `Hi! I'm interested in: ${product.name} - ₹${product.price}. Can you provide more details and place an order?`;
     const encoded = encodeURIComponent(message);
     window.open(`https://wa.me/8852808522?text=${encoded}`, "_blank");
-  };
-
-  const handleEmail = () => {
-    const subject = `Product Inquiry: ${product.name}`;
-    const body = `Hello,\n\nI'm interested in learning more about: ${product.name} (₹${product.price})\n\nPlease provide more details.\n\nThank you!`;
-    window.location.href = `mailto:hello@fabro.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -182,7 +174,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 <span className="bg-gradient-to-r from-muted-gold/30 to-gold/20 text-charcoal px-4 py-2 rounded-full text-sm font-medium border border-muted-gold/30">
                   {product.category}
                 </span>
-                {product.sections.includes('Best Sellers') && (
+                {product.sections.includes('best-sellers') && (
                   <span className="bg-wine-red/10 text-wine-red px-4 py-2 rounded-full text-sm font-medium border border-wine-red/20">
                     ⭐ Best Seller
                   </span>

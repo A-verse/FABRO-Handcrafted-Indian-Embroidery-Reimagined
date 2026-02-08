@@ -13,26 +13,32 @@ export default function ProductSectionDisplay({ section, title, description }: P
   const sectionProducts = getProductsBySection(section);
 
   return (
-    <section className="section-spacing">
-      {/* Section Header */}
-      <div className="mb-12">
-        <h2 className="heading-xl text-charcoal mb-3">{title}</h2>
-        <div className="inline-block h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full mb-4" />
-        <p className="body-lg text-charcoal/70 max-w-2xl">{description}</p>
-      </div>
+    <section className="section-spacing relative overflow-hidden">
+      {/* Subtle background decoration */}
+      <div className="absolute top-10 right-10 w-64 h-64 bg-muted-gold/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-10 left-10 w-64 h-64 bg-wine-red/5 rounded-full blur-3xl"></div>
 
-      {/* Products Grid */}
-      {sectionProducts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sectionProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+      <div className="relative z-10">
+        {/* Section Header */}
+        <div className="mb-12">
+          <h2 className="heading-xl text-charcoal mb-3">{title}</h2>
+          <div className="inline-block h-1 w-16 bg-gradient-to-r from-maroon to-wine-red rounded-full mb-4" />
+          <p className="body-lg text-charcoal/70 max-w-2xl">{description}</p>
         </div>
-      ) : (
-        <div className="text-center py-12">
-          <p className="text-charcoal/70">No products available in this section yet.</p>
-        </div>
-      )}
+
+        {/* Products Grid */}
+        {sectionProducts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {sectionProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16 bg-white/50 rounded-lg border border-ivory">
+            <p className="text-charcoal/70 italic">New pieces coming soon to this collection.</p>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

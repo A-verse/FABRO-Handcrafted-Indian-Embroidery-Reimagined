@@ -60,14 +60,14 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="h-full bg-white border border-ivory rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col hover:-translate-y-1">
+    <div className="h-full bg-white border border-ivory rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col hover:-translate-y-1 group">
       {/* Product Image Section */}
-      <div className="relative bg-ivory h-64 flex items-center justify-center overflow-hidden group">
+      <div className="relative bg-ivory h-64 flex items-center justify-center overflow-hidden">
         <Image
           src={productImage}
           alt={product.name}
           fill
-          className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+          className="object-cover object-center group-hover:scale-110 transition-transform duration-700"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
 
@@ -76,13 +76,13 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Discount Badge */}
         {discount > 0 && (
-          <div className="absolute top-3 right-3 bg-maroon text-ivory px-3 py-1 rounded text-xs font-semibold shadow-lg z-10">
+          <div className="absolute top-3 right-3 bg-maroon text-ivory px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg z-10">
             {discount}% OFF
           </div>
         )}
 
         {/* Category Tag */}
-        <div className="absolute top-3 left-3 bg-muted-gold/90 text-charcoal px-3 py-1 rounded text-xs font-medium z-10">
+        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-charcoal px-3 py-1.5 rounded-full text-xs font-medium z-10 shadow-md">
           {product.category}
         </div>
       </div>
@@ -128,13 +128,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="flex gap-2 mt-auto">
           <button
             onClick={handleWhatsApp}
-            className="flex-1 btn-primary text-xs sm:text-sm py-2.5 rounded transition-all duration-200 hover:shadow-md"
+            className="flex-1 btn-primary text-xs sm:text-sm py-2.5 transition-all duration-200 font-medium"
           >
             Order Now
           </button>
           <button
             onClick={handleEmail}
-            className="flex-1 btn-secondary text-xs sm:text-sm py-2.5 rounded transition-all duration-200 hover:shadow-md"
+            className="flex-1 btn-secondary text-xs sm:text-sm py-2.5 transition-all duration-200 font-medium"
           >
             Enquire
           </button>

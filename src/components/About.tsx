@@ -4,8 +4,12 @@ import Image from 'next/image';
 
 export default function About() {
   return (
-    <section id="about" className="section-spacing bg-gradient-to-b from-ivory to-ivory/50">
-      <div className="section-container">
+    <section id="about" className="section-spacing bg-gradient-to-b from-ivory to-ivory/50 relative overflow-hidden">
+      {/* Subtle background elements */}
+      <div className="absolute top-20 right-10 w-80 h-80 bg-muted-gold/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-wine-red/5 rounded-full blur-3xl"></div>
+
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 animate-slide-up">
           <p className="label-text mb-4">OUR HERITAGE</p>
@@ -22,15 +26,21 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           {/* Left: Image */}
           <div className="animate-slide-up order-2 md:order-1" style={{ animationDelay: '200ms' }}>
-            <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg border border-muted-gold/20">
+            <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-xl border border-muted-gold/20 group">
               <Image
-                src="https://images.unsplash.com/photo-1582142842583-1a30e5e4fae3?w=600&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1582142842583-1a30e5e4fae3?w=800&h=600&fit=crop&q=80"
                 alt="Indian embroidery artisan at work"
                 fill
-                className="object-cover object-center"
-                priority
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent"></div>
+              
+              {/* Floating stat badge */}
+              <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 border border-muted-gold/20">
+                <p className="text-2xl font-serif font-bold text-wine-red mb-1">100+</p>
+                <p className="text-xs text-charcoal/70 uppercase tracking-wide">Master Artisans</p>
+              </div>
             </div>
           </div>
 

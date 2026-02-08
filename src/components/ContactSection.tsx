@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -54,8 +55,22 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="section-spacing-lg bg-gradient-to-b from-ivory/40 to-ivory/20">
-      <div className="section-container">
+    <section className="section-spacing-lg bg-gradient-to-b from-ivory/40 to-ivory/20 relative overflow-hidden">
+      {/* Background imagery */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <Image
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&h=1080&fit=crop&q=60"
+          alt="Embroidery background texture"
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-20 right-10 w-96 h-96 bg-muted-gold/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-wine-red/5 rounded-full blur-3xl"></div>
+
+      <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 animate-slide-up">
           <p className="label-text mb-4">CONNECT WITH US</p>
@@ -70,13 +85,13 @@ export default function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
           {/* WhatsApp Card */}
-          <div className="bg-white border border-ivory rounded-lg p-8 text-center shadow-card hover:shadow-lg transition-all duration-300 group">
+          <div className="bg-white/80 backdrop-blur-sm border border-ivory rounded-lg p-8 text-center shadow-card hover:shadow-xl hover:bg-white transition-all duration-300 group">
             <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">💬</div>
             <h3 className="heading-sm text-charcoal mb-3">WhatsApp (Fastest)</h3>
             <p className="body-sm text-charcoal/70 mb-8">Quick responses, direct with FABRO team</p>
             <button
               onClick={handleWhatsAppDirect}
-              className="w-full btn-primary py-3 rounded-lg transition-all duration-200 hover:shadow-md font-medium"
+              className="w-full btn-primary py-3 transition-all duration-200 font-medium"
             >
               Message on WhatsApp
             </button>
