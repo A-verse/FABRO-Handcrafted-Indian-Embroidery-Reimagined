@@ -29,7 +29,7 @@ export default function Testimonials() {
       {/* Background fabric texture */}
       <div className="absolute inset-0 opacity-[0.04]">
         <Image
-          src="https://images.unsplash.com/photo-1580541831550-7323e45bbef5?w=1920&h=1080&fit=crop&q=90"
+          src="https://images.unsplash.com/photo-1585487000714-f23d5a6f97c4?w=1920&h=1080&fit=crop&q=90"
           alt="Fabric texture background"
           fill
           className="object-cover"

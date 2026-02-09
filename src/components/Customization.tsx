@@ -44,7 +44,7 @@ export default function CustomizationHighlight() {
               </div>
               <div className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-700 border border-charcoal/5">
                 <Image
-                  src="https://images.unsplash.com/photo-1595841952941-52f4aadfc0a0?w=400&h=400&fit=crop&q=90"
+                  src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&h=400&fit=crop&q=90"
                   alt="Thread selection"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
