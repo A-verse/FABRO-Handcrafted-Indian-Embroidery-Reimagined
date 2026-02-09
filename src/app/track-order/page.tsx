@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 import Link from 'next/link';
 
 interface Order {
@@ -51,6 +51,7 @@ export default function TrackOrderPage() {
     setSearched(true);
 
     try {
+      const supabase = getSupabaseClient();
       if (!orderNumber.trim() || !phoneOrEmail.trim()) {
         setError('Please enter both order ID and phone number or email');
         setIsLoading(false);

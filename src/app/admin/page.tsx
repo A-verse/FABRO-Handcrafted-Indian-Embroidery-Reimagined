@@ -4,7 +4,7 @@ import { AdminProtectedLayout } from '@/components/admin/AdminProtectedLayout';
 import { useAdmin } from '@/context/AdminContext';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 import Link from 'next/link';
 
 interface Order {
@@ -46,6 +46,7 @@ export default function AdminDashboardPage() {
   const fetchOrders = async () => {
     try {
       setIsLoading(true);
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('orders')
         .select(

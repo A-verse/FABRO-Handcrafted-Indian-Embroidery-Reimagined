@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 import { AdminProtectedLayout } from '@/components/admin/AdminProtectedLayout';
 import Link from 'next/link';
 
@@ -68,6 +68,7 @@ export default function OrderDetailPage() {
   const fetchOrder = async () => {
     try {
       setIsLoading(true);
+      const supabase = getSupabaseClient();
       const { data, error } = await supabase
         .from('orders')
         .select(
@@ -101,6 +102,7 @@ export default function OrderDetailPage() {
     try {
       setIsSaving(true);
       setError('');
+      const supabase = getSupabaseClient();
       const { error } = await supabase
         .from('orders')
         .update({ order_status: newStatus })

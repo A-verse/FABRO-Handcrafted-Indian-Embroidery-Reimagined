@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { getSupabaseClient } from '@/lib/supabase';
 
 interface AdminContextType {
   adminId: string | null;
@@ -23,6 +23,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
+        const supabase = getSupabaseClient();
         const {
           data: { session },
         } = await supabase.auth.getSession();
@@ -50,6 +51,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     checkAuth();
 
     // Subscribe to auth changes
+    const supabase = getSupabaseClient();
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
@@ -80,6 +82,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
+      const supabase = getSupabaseClient();
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -115,6 +118,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     try {
+      const supabase = getSupabaseClient();
       await supabase.auth.signOut();
       setAdminId(null);
       setEmail(null);
