@@ -5,7 +5,6 @@ import CustomizationHighlight from "@/components/Customization";
 import ProductSection from "@/components/ProductSection";
 import CraftProcess from "@/components/CraftProcess";
 import UnifiedTestimonials from "@/components/UnifiedTestimonials";
-import MeeshoSection from "@/components/MeeshoSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
@@ -29,23 +28,8 @@ export default function Home() {
       
       <Collections />
       <CustomizationHighlight />
-      
-      <ProductSection 
-        section="new-launches" 
-        title="Newly Launched" 
-        description="Fresh designs and latest arrivals"
-      />
-      
       <CraftProcess />
       <UnifiedTestimonials />
-      
-      <ProductSection 
-        section="on-sale" 
-        title="On Sale" 
-        description="Limited time offers and special discounts"
-      />
-      
-      <MeeshoSection />
       <ContactSection />
     </main>
   );

@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Product } from "@/data/products";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: Product;
@@ -41,22 +43,25 @@ const getProductImage = (category: string, id: number): string => {
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
+  const [AddedToCart, setAddedToCart] = useState(false);
+  
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
 
   const productImage = getProductImage(product.category, product.id);
 
-  const handleWhatsApp = () => {
-    const message = `Hi! I'm interested in: ${product.name} - ₹${product.price}. Can you provide more details?`;
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/8852808522?text=${encoded}`, "_blank");
-  };
-
-  const handleEmail = () => {
-    const subject = `Product Inquiry: ${product.name}`;
-    const body = `Hello,\n\nI'm interested in learning more about: ${product.name} (₹${product.price})\n\nPlease provide more details.\n\nThank you!`;
-    window.location.href = `mailto:hello@fabro.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id.toString(),
+      name: product.name,
+      price: product.price,
+      image: productImage,
+      category: product.category,
+    });
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2000);
   };
 
   return (
@@ -127,17 +132,21 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* CTAs */}
         <div className="flex gap-2 mt-auto">
           <button
-            onClick={handleWhatsApp}
-            className="flex-1 btn-primary text-xs sm:text-sm py-2.5 transition-all duration-200 font-medium"
+            onClick={handleAddToCart}
+            className={`flex-1 text-xs sm:text-sm py-3 px-3 transition-all duration-200 font-medium rounded-lg font-semibold min-h-[44px] flex items-center justify-center ${
+              AddedToCart
+                ? 'bg-green-600 text-white'
+                : 'bg-maroon text-ivory hover:bg-wine-red'
+            }`}
           >
-            Order Now
+            {AddedToCart ? '✓ Added!' : 'Add to Cart'}
           </button>
-          <button
-            onClick={handleEmail}
-            className="flex-1 btn-secondary text-xs sm:text-sm py-2.5 transition-all duration-200 font-medium"
+          <Link
+            href={`/product/${product.id}`}
+            className="flex-1 btn-secondary text-xs sm:text-sm py-3 px-3 transition-all duration-200 font-medium rounded-lg min-h-[44px] flex items-center justify-center text-center"
           >
-            Enquire
-          </button>
+            Details
+          </Link>
         </div>
       </div>
     </div>

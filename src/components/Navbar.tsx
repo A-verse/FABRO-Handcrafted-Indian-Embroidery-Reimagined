@@ -31,10 +31,9 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/products', label: 'Shop' },
-    { href: '/customize', label: 'Customization' },
-    { href: '/#craft', label: 'Craft' },
+    { href: '/customize', label: 'Customize' },
+    { href: '/track-order', label: 'Track Order' },
     { href: '/#reviews', label: 'Reviews' },
-    { href: '/#contact', label: 'Contact' },
   ];
 
   return (
