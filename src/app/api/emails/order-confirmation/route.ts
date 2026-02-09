@@ -2,7 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resendClient: Resend | null = null;
+
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('Missing RESEND_API_KEY environment variable');
+  }
+  if (!resendClient) {
+    resendClient = new Resend(apiKey);
+  }
+  return resendClient;
+}
 
 interface SendOrderEmailRequest {
   orderId: string;
@@ -10,6 +21,7 @@ interface SendOrderEmailRequest {
 
 export async function POST(req: NextRequest) {
   try {
+    const resend = getResendClient();
     const body: SendOrderEmailRequest = await req.json();
     const supabaseAdmin = getSupabaseAdmin();
 
