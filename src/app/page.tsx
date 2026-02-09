@@ -5,6 +5,7 @@ import CustomizationHighlight from "@/components/Customization";
 import ProductSection from "@/components/ProductSection";
 import CraftProcess from "@/components/CraftProcess";
 import UnifiedTestimonials from "@/components/UnifiedTestimonials";
+import MeeshoSection from "@/components/MeeshoSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
       <CustomizationHighlight />
       <CraftProcess />
       <UnifiedTestimonials />
+      <MeeshoSection />
       <ContactSection />
     </main>
   );
