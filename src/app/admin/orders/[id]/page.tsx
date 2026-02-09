@@ -68,7 +68,7 @@ export default function OrderDetailPage() {
   const fetchOrder = async () => {
     try {
       setIsLoading(true);
-      const supabase = getSupabaseClient();
+      const supabase = getSupabaseClient() as any;
       const { data, error } = await supabase
         .from('orders')
         .select(
@@ -102,10 +102,10 @@ export default function OrderDetailPage() {
     try {
       setIsSaving(true);
       setError('');
-      const supabase = getSupabaseClient();
+      const supabase = getSupabaseClient() as any;
       const { error } = await supabase
         .from('orders')
-        .update<Order>({ order_status: newStatus })
+        .update({ order_status: newStatus })
         .eq('id', orderId);
 
       if (error) throw error;
