@@ -105,7 +105,7 @@ export default function OrderDetailPage() {
       const supabase = getSupabaseClient();
       const { error } = await supabase
         .from('orders')
-        .update({ order_status: newStatus })
+        .update<Order>({ order_status: newStatus })
         .eq('id', orderId);
 
       if (error) throw error;
