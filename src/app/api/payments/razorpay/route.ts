@@ -1,10 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
 
-const razorpay = new Razorpay({
-  key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
+let razorpayClient: Razorpay | null = null;
+
+function getRazorpayClient() {
+  const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+  const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+  if (!keyId || !keySecret) {
+    throw new Error('Missing Razorpay environment variables');
+  }
+
+  if (!razorpayClient) {
+    razorpayClient = new Razorpay({
+      key_id: keyId,
+      key_secret: keySecret,
+    });
+  }
+
+  return razorpayClient;
+}
 
 interface CreateRazorpayOrderRequest {
   amount: number; // in paisa (₹100 = 10000 paisa)
@@ -17,6 +32,7 @@ interface CreateRazorpayOrderRequest {
 export async function POST(req: NextRequest) {
   try {
     const body: CreateRazorpayOrderRequest = await req.json();
+    const razorpay = getRazorpayClient();
 
     const options = {
       amount: body.amount, // amount in paisa
