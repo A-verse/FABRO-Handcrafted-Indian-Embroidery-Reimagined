@@ -79,10 +79,10 @@ export default function OrderDetailPage() {
         `
         )
         .eq('id', orderId)
-        .single();
+        .single<Order>();
 
-      if (error) throw error;
-      setOrder(data as Order);
+      if (error || !data) throw error;
+      setOrder(data);
       setNewStatus(data.order_status);
     } catch (error) {
       console.error('Error fetching order:', error);
