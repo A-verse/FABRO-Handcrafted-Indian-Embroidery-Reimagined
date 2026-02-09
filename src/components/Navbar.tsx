@@ -27,7 +27,7 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  const isHomePage = pathname === '/';
+  const useLightTheme = true;
 
   const navLinks = [
     { href: '/products', label: 'Shop' },
@@ -41,16 +41,16 @@ export default function Navbar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled || !isHomePage
+          isScrolled
             ? 'bg-white shadow-md'
-            : 'bg-transparent'
+            : 'bg-ivory/90 backdrop-blur-sm border-b border-ivory/70'
         }`}
       >
         <div className="section-container">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Logo
-              variant={isScrolled || !isHomePage ? 'dark' : 'light'}
+              variant={useLightTheme ? 'dark' : 'light'}
               size="sm"
             />
 
@@ -61,7 +61,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={`text-sm font-medium tracking-wide transition-colors ${
-                    isScrolled || !isHomePage
+                    useLightTheme
                       ? 'text-charcoal hover:text-wine-red'
                       : 'text-ivory hover:text-muted-gold'
                   }`}
@@ -77,14 +77,14 @@ export default function Navbar() {
               >
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-                    isScrolled || !isHomePage
+                    useLightTheme
                       ? 'bg-ivory hover:bg-wine-red/10'
                       : 'bg-white/10 hover:bg-white/20'
                   }`}
                 >
                   <svg
                     className={`w-5 h-5 ${
-                      isScrolled || !isHomePage ? 'text-charcoal' : 'text-ivory'
+                      useLightTheme ? 'text-charcoal' : 'text-ivory'
                     }`}
                     fill="none"
                     stroke="currentColor"
@@ -110,7 +110,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden w-10 h-10 flex items-center justify-center ${
-                isScrolled || !isHomePage ? 'text-charcoal' : 'text-ivory'
+                useLightTheme ? 'text-charcoal' : 'text-ivory'
               }`}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >

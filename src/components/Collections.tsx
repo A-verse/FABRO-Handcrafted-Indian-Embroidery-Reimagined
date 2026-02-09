@@ -9,7 +9,7 @@ const collections = [
     description: "Timeless pieces designed to become family treasures",
     accent: "Maroon & Gold",
     microcopy: "Stitched to stay. Forever.",
-    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&h=800&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=800&fit=crop&q=90",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const collections = [
     description: "Celebration-ready embroidered wear for special moments",
     accent: "Wine & Ivory",
     microcopy: "Made for memories.",
-    image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=800&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&h=800&fit=crop&q=90",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const collections = [
     description: "Refined daily wear with subtle embroidery details",
     accent: "Muted Gold",
     microcopy: "Luxe. Every day.",
-    image: "https://images.unsplash.com/photo-1585487000714-f23d5a6f97c4?w=600&h=800&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=800&fit=crop&q=90",
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const collections = [
     description: "Your vision brought to life by master artisans",
     accent: "Personalized",
     microcopy: "Your story, our craft.",
-    image: "https://images.unsplash.com/photo-1542272604-787c62d465d1?w=600&h=800&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=800&fit=crop&q=90",
   },
 ];
 

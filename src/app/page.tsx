@@ -4,8 +4,7 @@ import Collections from "@/components/Collections";
 import CustomizationHighlight from "@/components/Customization";
 import ProductSection from "@/components/ProductSection";
 import CraftProcess from "@/components/CraftProcess";
-import Testimonials from "@/components/Testimonials";
-import ExtendedTestimonials from "@/components/ExtendedTestimonials";
+import UnifiedTestimonials from "@/components/UnifiedTestimonials";
 import MeeshoSection from "@/components/MeeshoSection";
 import ContactSection from "@/components/ContactSection";
 
@@ -38,7 +37,7 @@ export default function Home() {
       />
       
       <CraftProcess />
-      <Testimonials />
+      <UnifiedTestimonials />
       
       <ProductSection 
         section="on-sale" 
@@ -46,7 +45,6 @@ export default function Home() {
         description="Limited time offers and special discounts"
       />
       
-      <ExtendedTestimonials />
       <MeeshoSection />
       <ContactSection />
     </main>

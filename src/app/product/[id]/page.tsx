@@ -93,12 +93,6 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     setTimeout(() => setAddedToCart(false), 3000);
   };
 
-  const handleWhatsApp = () => {
-    const message = `Hi! I'm interested in: ${product.name} - ₹${product.price}. Can you provide more details and place an order?`;
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/8852808522?text=${encoded}`, "_blank");
-  };
-
   return (
     <main className="min-h-screen pt-20">
       {/* Breadcrumb */}
@@ -253,20 +247,12 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                   )}
                 </button>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <button
-                    onClick={handleWhatsApp}
-                    className="btn-secondary py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-lg text-center"
-                  >
-                    WhatsApp Order
-                  </button>
-                  <Link
-                    href="/customize"
-                    className="btn-secondary py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-lg text-center flex items-center justify-center"
-                  >
-                    Customize This
-                  </Link>
-                </div>
+                <Link
+                  href="/customize"
+                  className="w-full btn-secondary py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-lg text-center flex items-center justify-center"
+                >
+                  Customize This
+                </Link>
               </div>
 
               {/* Additional Info */}

@@ -74,7 +74,7 @@ export default function ExtendedTestimonials() {
       {/* Background texture */}
       <div className="absolute inset-0 opacity-[0.03]">
         <Image
-          src="https://images.unsplash.com/photo-1542272604-787c62d465d1?w=1920&h=1080&fit=crop&q=60"
+          src="https://images.unsplash.com/photo-1580541831550-7323e45bbef5?w=1920&h=1080&fit=crop&q=90"
           alt="Embroidered fabric texture"
           fill
           className="object-cover"

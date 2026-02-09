@@ -28,7 +28,7 @@ export default function About() {
           <div className="animate-slide-up order-2 md:order-1" style={{ animationDelay: '200ms' }}>
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-700 border border-charcoal/5 group">
               <Image
-                src="https://images.unsplash.com/photo-1582142842583-1a30e5e4fae3?w=800&h=600&fit=crop&q=80"
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=90"
                 alt="Indian embroidery artisan at work"
                 fill
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700"

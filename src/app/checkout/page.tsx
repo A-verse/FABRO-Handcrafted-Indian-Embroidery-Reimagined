@@ -12,7 +12,7 @@ declare global {
 }
 
 interface PaymentMethod {
-  type: 'COD' | 'Razorpay';
+  type: 'COD' | 'Razorpay' | 'WhatsApp';
   label: string;
   description: string;
 }
@@ -22,7 +22,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [selectedPayment, setSelectedPayment] = useState<'COD' | 'Razorpay'>('COD');
+  const [selectedPayment, setSelectedPayment] = useState<'COD' | 'Razorpay' | 'WhatsApp'>('COD');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -136,6 +136,42 @@ export default function CheckoutPage() {
     }
   };
 
+  const handleWhatsAppPayment = async () => {
+    try {
+      const orderData = await createOrder();
+
+      // Generate WhatsApp message
+      const itemsList = items.map(item => 
+        `• ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString()}`
+      ).join('\n');
+
+      const message = `Hi! I'd like to confirm my order:\n\n*Order #${orderData.orderNumber}*\n\n${itemsList}\n\n*Total: ₹${totalPrice.toLocaleString()}*\n\nDelivery Address:\n${formData.name}\n${formData.phone}\n${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}\n\nPlease confirm!`;
+      
+      const encoded = encodeURIComponent(message);
+      
+      // Save order data to localStorage before opening WhatsApp
+      localStorage.setItem(`order-${orderData.orderId}`, JSON.stringify({
+        orderId: orderData.orderId,
+        orderNumber: orderData.orderNumber,
+        items,
+        totalPrice,
+        customerName: formData.name,
+        shippingAddress: `${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}`,
+        paymentMethod: 'WhatsApp',
+        createdAt: new Date().toISOString(),
+      }));
+
+      // Open WhatsApp and redirect to order confirmation
+      window.open(`https://wa.me/918852808522?text=${encoded}`, '_blank');
+      
+      // Clear cart and redirect
+      clearCart();
+      router.push(`/order-confirmation?orderId=${orderData.orderId}&orderNumber=${orderData.orderNumber}`);
+    } catch (error) {
+      setErrors({ form: error instanceof Error ? error.message : 'Failed to place order' });
+    }
+  };
+
   const handleRazorpayPayment = async () => {
     try {
       const orderData = await createOrder();
@@ -232,6 +268,8 @@ export default function CheckoutPage() {
     try {
       if (selectedPayment === 'COD') {
         await handleCODPayment();
+      } else if (selectedPayment === 'WhatsApp') {
+        await handleWhatsAppPayment();
       } else {
         await handleRazorpayPayment();
       }
@@ -277,6 +315,11 @@ export default function CheckoutPage() {
       type: 'COD',
       label: 'Cash on Delivery',
       description: 'Pay when you receive your order. Free shipping nationwide.',
+    },
+    {
+      type: 'WhatsApp',
+      label: 'Confirm via WhatsApp',
+      description: 'Send order details via WhatsApp for personal confirmation.',
     },
     {
       type: 'Razorpay',
@@ -467,7 +510,7 @@ export default function CheckoutPage() {
                           name="payment"
                           value={method.type}
                           checked={selectedPayment === method.type}
-                          onChange={(e) => setSelectedPayment(e.target.value as 'COD' | 'Razorpay')}
+                          onChange={(e) => setSelectedPayment(e.target.value as 'COD' | 'Razorpay' | 'WhatsApp')}
                           className="hidden"
                         />
                         <h3 className="font-bold text-charcoal">{method.label}</h3>

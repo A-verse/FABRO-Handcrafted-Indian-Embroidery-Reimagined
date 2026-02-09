@@ -63,7 +63,7 @@ export default function Hero() {
             {/* Editorial Image Rectangle - Vertical Format */}
             <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-700">
               <Image
-                src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&h=1000&fit=crop&q=85"
+                src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&h=1000&fit=crop&q=90"
                 alt="Premium embroidered Indian fabric detail"
                 fill
                 className="object-cover object-center hover:scale-105 transition-transform duration-700"

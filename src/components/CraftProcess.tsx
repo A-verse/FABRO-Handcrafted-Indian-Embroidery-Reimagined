@@ -8,28 +8,28 @@ const process_steps = [
     title: "Design",
     description: "Collaborate with our artisans to envision your piece",
     details: "Share your inspiration, color palette, and embroidery style. Our designers sketch initial concepts.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=90"
   },
   {
     step: "02",
     title: "Thread Selection",
     description: "Choose premium threads and embellishments",
     details: "Select from our curated collection of threads, silks, and traditional embroidery materials.",
-    image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&h=400&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=400&fit=crop&q=90"
   },
   {
     step: "03",
     title: "Embroidery",
     description: "Hand-embroidered with meticulous care",
     details: "Master artisans hand-embroider your piece using traditional techniques passed through generations.",
-    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=400&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=400&fit=crop&q=90"
   },
   {
     step: "04",
     title: "Finishing",
     description: "Quality inspection and careful finishing",
     details: "Each piece undergoes rigorous quality checks before hand-wrapped delivery to your door.",
-    image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=400&fit=crop&q=90"
   },
 ];
 

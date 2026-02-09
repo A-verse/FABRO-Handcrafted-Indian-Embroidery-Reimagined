@@ -9,7 +9,7 @@ export default function CustomizationHighlight() {
       {/* Background texture */}
       <div className="absolute inset-0 opacity-[0.03]">
         <Image
-          src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1920&h=1080&fit=crop&q=70"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&h=1080&fit=crop&q=90"
           alt="Fabric texture background"
           fill
           className="object-cover"
@@ -24,7 +24,7 @@ export default function CustomizationHighlight() {
               {/* Main large image */}
               <div className="col-span-2 aspect-[4/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-700 border border-charcoal/5">
                 <Image
-                  src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&h=600&fit=crop&q=80"
+                  src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&h=600&fit=crop&q=90"
                   alt="Hand embroidery process"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
@@ -35,7 +35,7 @@ export default function CustomizationHighlight() {
               {/* Two smaller images */}
               <div className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-700 border border-charcoal/5">
                 <Image
-                  src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop&q=80"
+                  src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop&q=90"
                   alt="Embroidered fabric detail"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
@@ -44,7 +44,7 @@ export default function CustomizationHighlight() {
               </div>
               <div className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-700 border border-charcoal/5">
                 <Image
-                  src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&h=400&fit=crop&q=80"
+                  src="https://images.unsplash.com/photo-1595841952941-52f4aadfc0a0?w=400&h=400&fit=crop&q=90"
                   alt="Thread selection"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"

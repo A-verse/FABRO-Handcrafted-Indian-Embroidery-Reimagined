@@ -12,27 +12,27 @@ interface ProductCardProps {
 const getProductImage = (category: string, id: number): string => {
   const imageMap: { [key: string]: string[] } = {
     "Kurtis": [
-      "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1542272604-787c62d465d1?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop&q=90",
+      "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500&h=500&fit=crop&q=90",
     ],
     "Shirts": [
-      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1598521910271-6e5e6b4f2e08?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=500&h=500&fit=crop&q=90",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=500&fit=crop&q=90",
     ],
     "Dupattas": [
-      "https://images.unsplash.com/photo-1535193566835-aa23bf28e7d0?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1537555467226-47bc2f18f89b?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop&q=90",
+      "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500&h=500&fit=crop&q=90",
     ],
     "Jeans": [
-      "https://images.unsplash.com/photo-1542272604-787c62d465d1?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1541999414701-4ee6c4b97d9d?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1542272604-787c62d465d1?w=500&h=500&fit=crop&q=90",
+      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=500&h=500&fit=crop&q=90",
     ],
     "Accessories": [
-      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&h=500&fit=crop&q=90",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop&q=90",
     ],
     "Custom Pieces": [
-      "https://images.unsplash.com/photo-1495562411223-441a19a6def3?w=500&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=500&fit=crop&q=90",
     ],
   };
   
