@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { supabaseAdmin } from '@/lib/supabase-admin';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,6 +11,7 @@ interface SendOrderEmailRequest {
 export async function POST(req: NextRequest) {
   try {
     const body: SendOrderEmailRequest = await req.json();
+    const supabaseAdmin = getSupabaseAdmin();
 
     // Get order details
     const { data: order, error: orderError } = await supabaseAdmin

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase-admin';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
 import { Database } from '@/lib/database.types';
 
 type Customer = Database['public']['Tables']['customers']['Insert'];
@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
     // Create or get customer
     let customerId: string;
 
+    const supabaseAdmin = getSupabaseAdmin();
     const { data: existingCustomer } = await supabaseAdmin
       .from('customers')
       .select('id')

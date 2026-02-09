@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase-admin';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export async function GET(
   _req: NextRequest,
@@ -7,6 +7,7 @@ export async function GET(
 ) {
   try {
     const orderId = params.orderId;
+    const supabaseAdmin = getSupabaseAdmin();
 
     const { data: order, error } = await supabaseAdmin
       .from('orders')
@@ -41,6 +42,7 @@ export async function PUT(
 ) {
   try {
     const orderId = params.orderId;
+    const supabaseAdmin = getSupabaseAdmin();
     const body = await req.json();
 
     const { data: order, error } = await supabaseAdmin

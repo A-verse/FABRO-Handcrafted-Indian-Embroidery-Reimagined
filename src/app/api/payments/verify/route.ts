@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { supabaseAdmin } from '@/lib/supabase-admin';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 interface VerifyPaymentRequest {
   orderId: string;
@@ -12,6 +12,7 @@ interface VerifyPaymentRequest {
 export async function POST(req: NextRequest) {
   try {
     const body: VerifyPaymentRequest = await req.json();
+    const supabaseAdmin = getSupabaseAdmin();
 
     // Verify signature
     const message = `${body.razorpayOrderId}|${body.razorpayPaymentId}`;
